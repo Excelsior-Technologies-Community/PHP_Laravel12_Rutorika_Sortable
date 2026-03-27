@@ -1,59 +1,271 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🚀 PHP Laravel 12 - Rutorika Sortable (Drag & Drop Sorting)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project demonstrates how to implement **Drag & Drop sorting functionality** in **Laravel 12** using the `rutorika/sortable` package.
+The UI is designed with **Tailwind CSS**, **SortableJS**, and **Toastify** for a smooth and interactive experience.
 
-## About Laravel
+Users can easily **reorder tasks by dragging and dropping them**, and the updated order will be stored automatically in the database.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# 📌 Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* Laravel 12 project setup
+* `rutorika/sortable` package integration
+* Drag & Drop task ordering
+* Database position-based sorting
+* Tailwind CSS modern UI
+* Toast notifications using Toastify
+* SortableJS for frontend drag-and-drop
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+# ⚙️ Installation Guide
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Step 1: Create Laravel Project & Install Package
 
-## Laravel Sponsors
+Open your terminal and run the following commands:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+composer create-project laravel/laravel PHP_Laravel12_Rutorika_Sortable
+cd PHP_Laravel12_Rutorika_Sortable
+composer require rutorika/sortable
+```
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# 🗄️ Step 2: Database & Migration Setup
 
-## Contributing
+Update your `.env` file with database credentials:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+DB_DATABASE=your_database
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## Code of Conduct
+Create Model, Migration, and Controller:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan make:model Task -mrc
+```
 
-## Security Vulnerabilities
+Open the migration file inside:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+database/migrations/xxxx_xx_xx_create_tasks_table.php
+```
 
-## License
+Replace it with:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```php
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::create('tasks', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->integer('position');
+            $table->timestamps();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::dropIfExists('tasks');
+    }
+};
+```
+
+Run migration:
+
+```bash
+php artisan migrate
+```
+
+---
+
+# 🧩 Step 3: Model Setup
+
+Open:
+
+```
+app/Models/Task.php
+```
+
+Add the `SortableTrait`.
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Rutorika\Sortable\SortableTrait;
+
+class Task extends Model
+{
+    use SortableTrait;
+
+    protected $fillable = ['title','position'];
+}
+```
+
+---
+
+# 🔧 Step 4: Package Configuration Fix
+
+Sometimes Laravel 12 cannot publish the package configuration automatically.
+
+Create a new file:
+
+```
+config/sortable.php
+```
+
+Add the following code:
+
+```php
+<?php
+
+return [
+    'entities' => [
+        'tasks' => \App\Models\Task::class,
+    ],
+];
+```
+
+---
+
+# 🛣️ Step 5: Routes Setup
+
+Open:
+
+```
+routes/web.php
+```
+
+Add these routes:
+
+```php
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
+use Rutorika\Sortable\SortableController;
+
+Route::get('/', [TaskController::class, 'index']);
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+
+Route::post('/sort', [SortableController::class, 'sort'])->name('sort');
+```
+
+---
+
+# 🧠 Step 6: Controller Logic
+
+Open:
+
+```
+app/Http/Controllers/TaskController.php
+```
+
+Add this code:
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Task;
+use Illuminate\Http\Request;
+
+class TaskController extends Controller
+{
+    public function index()
+    {
+        $tasks = Task::sorted()->get();
+        return view('tasks', compact('tasks'));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255'
+        ]);
+
+        Task::create([
+            'title' => $request->title
+        ]);
+
+        return back();
+    }
+}
+```
+
+---
+
+# 🎨 Step 7: Frontend View (Drag & Drop UI)
+
+Create the view file:
+
+```
+resources/views/tasks.blade.php
+```
+
+Add the following UI with **TailwindCSS + SortableJS + Toastify**.
+
+```html
+<!-- Full UI code goes here -->
+<!-- (Paste your Blade file code here exactly as in your project) -->
+```
+
+This UI allows users to:
+
+* Add new tasks
+* Drag tasks using a handle
+* Automatically save the new order using AJAX
+
+---
+
+# ▶️ Step 8: Run the Project
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+Now open the browser:
+
+```
+http://localhost:8000
+```
+
+Your **Drag & Drop Task Manager** is now ready! 🎉
+
+---
+
+# 📦 Technologies Used
+
+* Laravel 12
+* PHP
+* Rutorika Sortable
+* Tailwind CSS
+* SortableJS
+* Toastify
+
+---
+
+ # Outpot
+<img width="713" height="518" alt="image" src="https://github.com/user-attachments/assets/07136a6b-875c-4386-b98f-22b563f7e716" />
+
+---
+
+⭐ If you found this project useful, consider giving it a star on GitHub!
