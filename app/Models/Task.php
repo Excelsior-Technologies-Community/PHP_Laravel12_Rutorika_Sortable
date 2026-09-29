@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
@@ -8,5 +9,14 @@ class Task extends Model
 {
     use SortableTrait;
 
-    protected $fillable = ['title', 'position'];
+    protected $fillable = [
+        'title',
+        'position',
+        'priority',
+        'status',
+    ];
+
+    protected $casts = [
+        'position' => 'integer',
+    ];
 }

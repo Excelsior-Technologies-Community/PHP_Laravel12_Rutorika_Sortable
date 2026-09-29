@@ -2,12 +2,30 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TaskController;
-Route::get('/', function () {
-    return view('welcome');
-});
+use Rutorika\Sortable\SortableController;
 
+/*
+|--------------------------------------------------------------------------
+| Task Manager Routes
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/', [TaskController::class, 'index']);
-Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
+// Task manager
+Route::get('/', [TaskController::class, 'index'])
+    ->name('tasks.index');
 
-Route::post('/sort', [\Rutorika\Sortable\SortableController::class, 'sort'])->name('sort');
+// Store new task
+Route::post('/tasks', [TaskController::class, 'store'])
+    ->name('tasks.store');
+
+// Update task priority and status
+Route::patch('/tasks/{task}', [TaskController::class, 'update'])
+    ->name('tasks.update');
+
+// Task analytics dashboard
+Route::get('/dashboard', [TaskController::class, 'dashboard'])
+    ->name('tasks.dashboard');
+
+// Rutorika drag & drop sorting
+Route::post('/sort', [SortableController::class, 'sort'])
+    ->name('sort');
