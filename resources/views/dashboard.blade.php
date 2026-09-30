@@ -15,7 +15,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet"
     >
 
@@ -67,7 +67,7 @@
 
             <a
                 href="{{ route('tasks.index') }}"
-                class="inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-lg font-medium transition"
+                class="inline-flex items-center justify-center bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-3 rounded-lg font-medium"
             >
 
                 <i class="fa-solid fa-list-check mr-2"></i>
@@ -90,27 +90,13 @@
 
         <div class="bg-white rounded-2xl shadow-xl p-6">
 
-            <div class="flex items-center justify-between">
+            <p class="text-sm text-gray-500">
+                Total Tasks
+            </p>
 
-                <div>
-
-                    <p class="text-sm text-gray-500">
-                        Total Tasks
-                    </p>
-
-                    <h2 class="text-3xl font-bold text-gray-800 mt-2">
-                        {{ $totalTasks }}
-                    </h2>
-
-                </div>
-
-                <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
-
-                    <i class="fa-solid fa-list-check text-xl"></i>
-
-                </div>
-
-            </div>
+            <h2 class="text-3xl font-bold text-indigo-600 mt-2">
+                {{ $totalTasks }}
+            </h2>
 
         </div>
 
@@ -119,56 +105,28 @@
 
         <div class="bg-white rounded-2xl shadow-xl p-6">
 
-            <div class="flex items-center justify-between">
+            <p class="text-sm text-gray-500">
+                Pending
+            </p>
 
-                <div>
-
-                    <p class="text-sm text-gray-500">
-                        Pending
-                    </p>
-
-                    <h2 class="text-3xl font-bold text-yellow-600 mt-2">
-                        {{ $pendingTasks }}
-                    </h2>
-
-                </div>
-
-                <div class="w-12 h-12 rounded-xl bg-yellow-100 text-yellow-600 flex items-center justify-center">
-
-                    <i class="fa-solid fa-clock text-xl"></i>
-
-                </div>
-
-            </div>
+            <h2 class="text-3xl font-bold text-yellow-600 mt-2">
+                {{ $pendingTasks }}
+            </h2>
 
         </div>
 
 
-        <!-- In Progress -->
+        <!-- Progress -->
 
         <div class="bg-white rounded-2xl shadow-xl p-6">
 
-            <div class="flex items-center justify-between">
+            <p class="text-sm text-gray-500">
+                In Progress
+            </p>
 
-                <div>
-
-                    <p class="text-sm text-gray-500">
-                        In Progress
-                    </p>
-
-                    <h2 class="text-3xl font-bold text-blue-600 mt-2">
-                        {{ $inProgressTasks }}
-                    </h2>
-
-                </div>
-
-                <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
-
-                    <i class="fa-solid fa-spinner text-xl"></i>
-
-                </div>
-
-            </div>
+            <h2 class="text-3xl font-bold text-blue-600 mt-2">
+                {{ $inProgressTasks }}
+            </h2>
 
         </div>
 
@@ -177,261 +135,74 @@
 
         <div class="bg-white rounded-2xl shadow-xl p-6">
 
-            <div class="flex items-center justify-between">
+            <p class="text-sm text-gray-500">
+                Completed
+            </p>
 
-                <div>
-
-                    <p class="text-sm text-gray-500">
-                        Completed
-                    </p>
-
-                    <h2 class="text-3xl font-bold text-green-600 mt-2">
-                        {{ $completedTasks }}
-                    </h2>
-
-                </div>
-
-                <div class="w-12 h-12 rounded-xl bg-green-100 text-green-600 flex items-center justify-center">
-
-                    <i class="fa-solid fa-circle-check text-xl"></i>
-
-                </div>
-
-            </div>
+            <h2 class="text-3xl font-bold text-green-600 mt-2">
+                {{ $completedTasks }}
+            </h2>
 
         </div>
 
 
-        <!-- High Priority -->
+        <!-- Completion -->
 
         <div class="bg-white rounded-2xl shadow-xl p-6">
 
-            <div class="flex items-center justify-between">
+            <p class="text-sm text-gray-500">
+                Completion Rate
+            </p>
 
-                <div>
-
-                    <p class="text-sm text-gray-500">
-                        High Priority
-                    </p>
-
-                    <h2 class="text-3xl font-bold text-red-600 mt-2">
-                        {{ $highPriorityTasks }}
-                    </h2>
-
-                </div>
-
-                <div class="w-12 h-12 rounded-xl bg-red-100 text-red-600 flex items-center justify-center">
-
-                    <i class="fa-solid fa-triangle-exclamation text-xl"></i>
-
-                </div>
-
-            </div>
+            <h2 class="text-3xl font-bold text-purple-600 mt-2">
+                {{ $completedRate }}%
+            </h2>
 
         </div>
 
     </div>
 
 
-    <!-- Analytics -->
+    <!-- Priority -->
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
 
-
-        <!-- Status Analytics -->
 
         <div class="bg-white rounded-2xl shadow-xl p-6">
 
-            <h2 class="text-xl font-semibold text-gray-800 mb-6">
+            <p class="text-sm text-gray-500">
+                High Priority
+            </p>
 
-                <i class="fa-solid fa-chart-pie text-indigo-600 mr-2"></i>
-
-                Task Status Overview
-
-            </h2>
-
-
-            <!-- Pending -->
-
-            <div class="mb-5">
-
-                <div class="flex justify-between mb-2">
-
-                    <span class="text-sm font-medium text-gray-700">
-                        Pending
-                    </span>
-
-                    <span class="text-sm font-semibold text-yellow-600">
-                        {{ $pendingTasks }}
-                    </span>
-
-                </div>
-
-                <div class="w-full bg-gray-200 rounded-full h-3">
-
-                    <div
-                        class="bg-yellow-500 h-3 rounded-full"
-                        style="width: {{ $totalTasks > 0 ? ($pendingTasks / $totalTasks) * 100 : 0 }}%"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- In Progress -->
-
-            <div class="mb-5">
-
-                <div class="flex justify-between mb-2">
-
-                    <span class="text-sm font-medium text-gray-700">
-                        In Progress
-                    </span>
-
-                    <span class="text-sm font-semibold text-blue-600">
-                        {{ $inProgressTasks }}
-                    </span>
-
-                </div>
-
-                <div class="w-full bg-gray-200 rounded-full h-3">
-
-                    <div
-                        class="bg-blue-500 h-3 rounded-full"
-                        style="width: {{ $totalTasks > 0 ? ($inProgressTasks / $totalTasks) * 100 : 0 }}%"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Completed -->
-
-            <div>
-
-                <div class="flex justify-between mb-2">
-
-                    <span class="text-sm font-medium text-gray-700">
-                        Completed
-                    </span>
-
-                    <span class="text-sm font-semibold text-green-600">
-                        {{ $completedTasks }}
-                    </span>
-
-                </div>
-
-                <div class="w-full bg-gray-200 rounded-full h-3">
-
-                    <div
-                        class="bg-green-500 h-3 rounded-full"
-                        style="width: {{ $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0 }}%"
-                    ></div>
-
-                </div>
-
-            </div>
+            <p class="text-3xl font-bold text-red-600 mt-2">
+                {{ $highPriorityTasks }}
+            </p>
 
         </div>
 
 
-        <!-- Priority Analytics -->
+        <div class="bg-white rounded-2xl shadow-xl p-6">
+
+            <p class="text-sm text-gray-500">
+                Medium Priority
+            </p>
+
+            <p class="text-3xl font-bold text-yellow-600 mt-2">
+                {{ $mediumPriorityTasks }}
+            </p>
+
+        </div>
+
 
         <div class="bg-white rounded-2xl shadow-xl p-6">
 
-            <h2 class="text-xl font-semibold text-gray-800 mb-6">
+            <p class="text-sm text-gray-500">
+                Low Priority
+            </p>
 
-                <i class="fa-solid fa-flag text-indigo-600 mr-2"></i>
-
-                Priority Distribution
-
-            </h2>
-
-
-            <!-- High -->
-
-            <div class="mb-5">
-
-                <div class="flex justify-between mb-2">
-
-                    <span class="text-sm font-medium text-gray-700">
-                        High Priority
-                    </span>
-
-                    <span class="text-sm font-semibold text-red-600">
-                        {{ $highPriorityTasks }}
-                    </span>
-
-                </div>
-
-                <div class="w-full bg-gray-200 rounded-full h-3">
-
-                    <div
-                        class="bg-red-500 h-3 rounded-full"
-                        style="width: {{ $totalTasks > 0 ? ($highPriorityTasks / $totalTasks) * 100 : 0 }}%"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Medium -->
-
-            <div class="mb-5">
-
-                <div class="flex justify-between mb-2">
-
-                    <span class="text-sm font-medium text-gray-700">
-                        Medium Priority
-                    </span>
-
-                    <span class="text-sm font-semibold text-yellow-600">
-                        {{ $mediumPriorityTasks }}
-                    </span>
-
-                </div>
-
-                <div class="w-full bg-gray-200 rounded-full h-3">
-
-                    <div
-                        class="bg-yellow-500 h-3 rounded-full"
-                        style="width: {{ $totalTasks > 0 ? ($mediumPriorityTasks / $totalTasks) * 100 : 0 }}%"
-                    ></div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Low -->
-
-            <div>
-
-                <div class="flex justify-between mb-2">
-
-                    <span class="text-sm font-medium text-gray-700">
-                        Low Priority
-                    </span>
-
-                    <span class="text-sm font-semibold text-green-600">
-                        {{ $lowPriorityTasks }}
-                    </span>
-
-                </div>
-
-                <div class="w-full bg-gray-200 rounded-full h-3">
-
-                    <div
-                        class="bg-green-500 h-3 rounded-full"
-                        style="width: {{ $totalTasks > 0 ? ($lowPriorityTasks / $totalTasks) * 100 : 0 }}%"
-                    ></div>
-
-                </div>
-
-            </div>
+            <p class="text-3xl font-bold text-green-600 mt-2">
+                {{ $lowPriorityTasks }}
+            </p>
 
         </div>
 
@@ -457,7 +228,7 @@
             <div class="bg-indigo-50 rounded-xl p-5">
 
                 <p class="text-sm text-indigo-600 font-medium">
-                    Average Task Position
+                    Average Position
                 </p>
 
                 <p class="text-3xl font-bold text-indigo-800 mt-2">
@@ -470,11 +241,11 @@
             <div class="bg-purple-50 rounded-xl p-5">
 
                 <p class="text-sm text-purple-600 font-medium">
-                    Sortable Tasks
+                    Highest Position
                 </p>
 
                 <p class="text-3xl font-bold text-purple-800 mt-2">
-                    {{ $totalTasks }}
+                    {{ $highestPosition }}
                 </p>
 
             </div>
@@ -483,13 +254,11 @@
             <div class="bg-pink-50 rounded-xl p-5">
 
                 <p class="text-sm text-pink-600 font-medium">
-                    Completed Rate
+                    Sortable Tasks
                 </p>
 
                 <p class="text-3xl font-bold text-pink-800 mt-2">
-
-                    {{ $totalTasks > 0 ? round(($completedTasks / $totalTasks) * 100, 1) : 0 }}%
-
+                    {{ $totalTasks }}
                 </p>
 
             </div>
@@ -499,17 +268,120 @@
     </div>
 
 
-    <!-- Recent Activity -->
+    <!-- Status Progress -->
+
+    <div class="bg-white rounded-2xl shadow-xl p-6 mb-6">
+
+        <h2 class="text-xl font-semibold text-gray-800 mb-6">
+
+            <i class="fa-solid fa-chart-pie text-indigo-600 mr-2"></i>
+
+            Task Status Overview
+
+        </h2>
+
+
+        <!-- Pending -->
+
+        <div class="mb-5">
+
+            <div class="flex justify-between mb-2">
+
+                <span class="font-medium">
+                    Pending
+                </span>
+
+                <span class="font-semibold text-yellow-600">
+                    {{ $pendingTasks }}
+                </span>
+
+            </div>
+
+            <div class="w-full bg-gray-200 rounded-full h-3">
+
+                <div
+                    class="bg-yellow-500 h-3 rounded-full"
+                    style="width: {{ $totalTasks > 0 ? ($pendingTasks / $totalTasks) * 100 : 0 }}%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- In Progress -->
+
+        <div class="mb-5">
+
+            <div class="flex justify-between mb-2">
+
+                <span class="font-medium">
+                    In Progress
+                </span>
+
+                <span class="font-semibold text-blue-600">
+                    {{ $inProgressTasks }}
+                </span>
+
+            </div>
+
+            <div class="w-full bg-gray-200 rounded-full h-3">
+
+                <div
+                    class="bg-blue-500 h-3 rounded-full"
+                    style="width: {{ $totalTasks > 0 ? ($inProgressTasks / $totalTasks) * 100 : 0 }}%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Completed -->
+
+        <div>
+
+            <div class="flex justify-between mb-2">
+
+                <span class="font-medium">
+                    Completed
+                </span>
+
+                <span class="font-semibold text-green-600">
+                    {{ $completedTasks }}
+                </span>
+
+            </div>
+
+            <div class="w-full bg-gray-200 rounded-full h-3">
+
+                <div
+                    class="bg-green-500 h-3 rounded-full"
+                    style="width: {{ $totalTasks > 0 ? ($completedTasks / $totalTasks) * 100 : 0 }}%"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Tasks -->
 
     <div class="bg-white rounded-2xl shadow-xl p-6">
 
-        <h2 class="text-xl font-semibold text-gray-800 mb-5">
+        <div class="flex items-center justify-between mb-5">
 
-            <i class="fa-solid fa-clock-rotate-left text-indigo-600 mr-2"></i>
+            <h2 class="text-xl font-semibold text-gray-800">
 
-            Recent Task Activity
+                <i class="fa-solid fa-clock-rotate-left text-indigo-600 mr-2"></i>
 
-        </h2>
+                Recent Task Activity
+
+            </h2>
+
+        </div>
 
 
         <div class="overflow-x-auto">
@@ -520,23 +392,23 @@
 
                     <tr class="border-b border-gray-200">
 
-                        <th class="text-left py-3 px-3 text-sm font-semibold text-gray-600">
+                        <th class="text-left py-3 px-3">
                             Task
                         </th>
 
-                        <th class="text-left py-3 px-3 text-sm font-semibold text-gray-600">
+                        <th class="text-left py-3 px-3">
                             Priority
                         </th>
 
-                        <th class="text-left py-3 px-3 text-sm font-semibold text-gray-600">
+                        <th class="text-left py-3 px-3">
                             Status
                         </th>
 
-                        <th class="text-left py-3 px-3 text-sm font-semibold text-gray-600">
+                        <th class="text-left py-3 px-3">
                             Position
                         </th>
 
-                        <th class="text-left py-3 px-3 text-sm font-semibold text-gray-600">
+                        <th class="text-left py-3 px-3">
                             Updated
                         </th>
 
@@ -549,9 +421,9 @@
 
                     @forelse($recentTasks as $task)
 
-                        <tr class="border-b border-gray-100 hover:bg-gray-50">
+                        <tr class="border-b border-gray-100">
 
-                            <td class="py-4 px-3 font-medium text-gray-800">
+                            <td class="py-4 px-3 font-medium">
                                 {{ $task->title }}
                             </td>
 
@@ -606,14 +478,14 @@
                             </td>
 
 
-                            <td class="py-4 px-3 text-gray-600">
+                            <td class="py-4 px-3">
                                 {{ $task->position }}
                             </td>
 
 
-                            <td class="py-4 px-3 text-gray-500 text-sm">
+                            <td class="py-4 px-3 text-sm text-gray-500">
 
-                                {{ $task->updated_at->format('d M Y, h:i A') }}
+                                {{ $task->updated_at?->format('d M Y, h:i A') }}
 
                             </td>
 
@@ -627,6 +499,7 @@
                                 colspan="5"
                                 class="text-center py-8 text-gray-500"
                             >
+
                                 No task activity available.
 
                             </td>
@@ -642,7 +515,6 @@
         </div>
 
     </div>
-
 
 </div>
 
